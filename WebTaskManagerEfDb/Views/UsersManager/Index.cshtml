@@ -1,0 +1,48 @@
+﻿@model WebTaskManagerEfDb.ViewModels.Users.UsersListVM
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create new user", "Edit")
+</p>
+
+
+<table class="table table-hover">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Admin Status</th>
+        <th>Operations</th>
+    </tr>
+
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>
+                @item.FirstName
+            </td>
+            <td>
+                @item.LastName
+            </td>
+            <td>
+                @item.Username
+            </td>
+            <td>
+                @item.AdminStatus
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.Partial("_PagingPartial", Model.Pager)
+</div>
