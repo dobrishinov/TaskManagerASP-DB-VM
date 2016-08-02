@@ -186,8 +186,9 @@
     <Content Include="Views\UsersManager\Edit.cshtml" />
     <Content Include="Views\TasksManager\Index.cshtml" />
     <Content Include="Views\TasksManager\Edit.cshtml" />
-    <Content Include="Views\TasksManager\Details.cshtml" />
+    <Content Include="Views\TasksManager\Details2.cshtml" />
     <Content Include="Views\Shared\_PagingPartial.cshtml" />
+    <Content Include="Views\TasksManager\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

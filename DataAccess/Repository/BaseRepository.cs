@@ -45,6 +45,11 @@ namespace DataAccess.Repository
             return result;
         }
 
+        public object GetAll<T>(Func<T, bool> p) where T : BaseEntity, new()
+        {
+            throw new NotImplementedException();
+        }
+
         public int Count(Expression<Func<T, Boolean>> expr = null)
         {
             return expr == null ? this.Db.Items.Count() : this.Db.Items.Count(expr);

@@ -23,24 +23,31 @@
             this.Repository = CreateRepository();
         }
 
+        protected virtual void PopulateIndex(IVM model)
+        {
+            TryUpdateModel(model);
+            BaseRepository<T> repo = CreateRepository();
+            model.Items = repo.GetAll().ToList();
+        }
+
         private BaseRepository<T> Repository = null;
         public abstract BaseRepository<T> CreateRepository();
         public abstract void PopulateModel(EVM model, T entity);
         public abstract void PopulateEntity(T entity, EVM model);
 
         protected abstract void BuildIndexModel(IVM model);
-        
+
 
         // GET: Base
         public ActionResult Index()
         {
             if (AuthenticationManager.LoggedUser == null)
                 return RedirectToAction("Login", "Home");
-            
+
             IVM model = new IVM();
             model.Pager = new Pager();
             TryUpdateModel(model);
-            
+
             BuildIndexModel(model);
             return View(model);
         }
@@ -50,8 +57,8 @@
         {
             if (AuthenticationManager.LoggedUser == null)
                 return RedirectToAction("Login", "Home");
-            
-            T entity = (id==null || id<=0 ) ? new T() : Repository.GetById(id);
+
+            T entity = (id == null || id <= 0) ? new T() : Repository.GetById(id);
             EVM model = new EVM();
             PopulateModel(model, entity);
             return View(model);
@@ -65,24 +72,33 @@
 
             EVM model = new EVM();
             TryUpdateModel(model);
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                T entity = new T();
-                PopulateEntity(entity, model);
-                Repository.Save(entity);
-
-                return RedirectToAction("Index");
+                return View(model);
             }
-            return View(model);
+
+            T entity = new T();
+            PopulateEntity(entity, model);
+            Repository.Save(entity);
+
+            return RedirectToAction("Index");
         }
 
+        public virtual ActionResult Details(int id)
+        {
+            EVM model = new EVM();
+            T entity = new T();
+            entity = CreateRepository().GetById(id);
+            PopulateModel(model, entity);
+            return View(model);
+        }
 
         public ActionResult Delete(int id)
         {
             if (AuthenticationManager.LoggedUser == null)
                 return RedirectToAction("Login", "Home");
 
-           
+
             T entity = Repository.GetById(id);
             Repository.Delete(entity);
 

@@ -7,6 +7,8 @@
     using Models;
     using ViewModels;
     using System.Linq;
+    using System.Web.Mvc;
+
     public class TasksManagerController : BaseController<TaskEntity, TasksEditVM, TasksListVM>
     {
         public override BaseRepository<TaskEntity> CreateRepository()
@@ -14,8 +16,20 @@
             return new TasksRepository();
         }
 
+        protected override void PopulateIndex(TasksListVM model)
+        {
+            //model.Filter = new TasksFilterVM();
+            TryUpdateModel(model);
+            TasksRepository repo = new TasksRepository();
+            model.Items = repo.GetAll(t => t.CreatorId == AuthenticationManager.LoggedUser.Id
+                                  || t.ResponsibleUsers == AuthenticationManager.LoggedUser.Id).ToList();
+
+            model.Items = repo.GetAll(/*model.Filter.BuildFilter()*/).ToList();
+        }
+
         public override void PopulateEntity(TaskEntity entity, TasksEditVM model)
         {
+
             entity.Id = model.Id;
             entity.CreatorId = model.CreatorId;
             entity.CreatorName = model.CreatorName;
@@ -23,10 +37,14 @@
             entity.ResponsibleUserName = model.ResponsibleUserName;
             entity.Title = model.Title;
             entity.Content = model.Content;
+
+            UsersRepository userRepo = new UsersRepository();
+            model.Users = userRepo.GetAll().ToList();
         }
 
         public override void PopulateModel(TasksEditVM model, TaskEntity entity)
         {
+
             model.Id = entity.Id;
             model.CreatorId = AuthenticationManager.LoggedUser.Id;
             model.CreatorName = AuthenticationManager.LoggedUser.Username;
@@ -34,6 +52,9 @@
             model.ResponsibleUserName = entity.ResponsibleUserName;
             model.Title = entity.Title;
             model.Content = entity.Content;
+
+            UsersRepository userRepo = new UsersRepository();
+            model.Users = userRepo.GetAll().ToList();
         }
 
         protected override void BuildIndexModel(TasksListVM model)
@@ -42,10 +63,16 @@
             string action = this.ControllerContext.RouteData.Values["action"].ToString();
             string controller = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            model.Items = repo.GetAll(t=>t.CreatorId==AuthenticationManager.LoggedUser.Id, model.Pager.CurrentPage, model.Pager.PageSize).ToList();
-            model.Pager = new Pager(repo.GetAll(t => t.CreatorId == AuthenticationManager.LoggedUser.Id).Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
+            model.Items = repo.GetAll(t => t.CreatorId == AuthenticationManager.LoggedUser.Id
+                                  || t.ResponsibleUsers == AuthenticationManager.LoggedUser.Id, model.Pager.CurrentPage, model.Pager.PageSize).ToList();
+            model.Pager = new Pager(repo.GetAll(t => t.CreatorId == AuthenticationManager.LoggedUser.Id
+                                  || t.ResponsibleUsers == AuthenticationManager.LoggedUser.Id).Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
         }
 
+        public override ActionResult Details(int id)
+        {
+            return base.Details(id);
+        }
         //    public ActionResult Index()
         //    {
         //        if (AuthenticationManager.LoggedUser == null)
