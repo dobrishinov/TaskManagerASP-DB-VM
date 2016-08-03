@@ -10,18 +10,13 @@
         [Required]
         public int CreatorId { get; set; }
         [Required]
-        public string CreatorName { get; set; }
-        [Required]
-        public string ResponsibleUserName { get; set; }
-        [Required]
         public string Title { get; set; }
         [Required]
         public string Content { get; set; }
-        //[Required]
-        //public string Creator { get; set; }
-
-        [Required(ErrorMessage = "Assignee is required!")]
-        [Display(Name = "Assignee:")]
+        public string CreatorName { get; set; }
+        public string ResponsibleName { get; set; }
+        [Required(ErrorMessage = "Assigned is required!")]
+        [Display(Name = "Assigned to:")]
         public int ResponsibleUsers { get; set; }
 
         public List<UserEntity> Users;

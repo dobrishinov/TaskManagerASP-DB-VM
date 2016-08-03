@@ -16,15 +16,6 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.CreatorId)
-        @Html.HiddenFor(model => model.CreatorName)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ResponsibleUserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ResponsibleUserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ResponsibleUserName, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -49,6 +40,7 @@
                 @Html.ValidationMessageFor(model => model.ResponsibleUsers, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

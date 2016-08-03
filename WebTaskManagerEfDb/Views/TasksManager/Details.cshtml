@@ -7,25 +7,9 @@
 <h2>Details</h2>
 
 <div>
-    <h4>TasksEditVM</h4>
+    <h4>Tasks Details</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatorId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatorId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ResponsibleUsers)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ResponsibleUsers)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.CreatorName)
         </dt>
@@ -35,11 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ResponsibleUserName)
+            @Html.DisplayNameFor(model => model.ResponsibleName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ResponsibleUserName)
+            @Html.DisplayFor(model => model.ResponsibleName)
         </dd>
 
         <dt>
@@ -60,6 +44,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "TaskManagerController", new { @class = "btn btn-default" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success" })
 </p>

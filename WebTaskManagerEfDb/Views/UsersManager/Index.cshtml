@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create new user", "Edit")
+    @Html.ActionLink("Create new user", "Edit", "UserManagerController", new { @class = "btn btn-success" })
 </p>
 
 
@@ -36,8 +36,8 @@
                 @item.AdminStatus
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

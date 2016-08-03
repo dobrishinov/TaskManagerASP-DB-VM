@@ -29,12 +29,8 @@
 
         public override void PopulateEntity(TaskEntity entity, TasksEditVM model)
         {
-
-            entity.Id = model.Id;
-            entity.CreatorId = model.CreatorId;
-            entity.CreatorName = model.CreatorName;
+            entity.CreatorId = AuthenticationManager.LoggedUser.Id;
             entity.ResponsibleUsers = model.ResponsibleUsers;
-            entity.ResponsibleUserName = model.ResponsibleUserName;
             entity.Title = model.Title;
             entity.Content = model.Content;
 
@@ -44,15 +40,18 @@
 
         public override void PopulateModel(TasksEditVM model, TaskEntity entity)
         {
+            UsersRepository repo = new UsersRepository();
+            if (entity.CreatorId > 0 && entity.ResponsibleUsers > 0)
+            {
+                model.CreatorName = repo.GetAll(u => u.Id == entity.CreatorId).FirstOrDefault().Username;
+                model.ResponsibleName = repo.GetAll(t => t.Id == entity.ResponsibleUsers).FirstOrDefault().Username;
+            }
 
             model.Id = entity.Id;
-            model.CreatorId = AuthenticationManager.LoggedUser.Id;
-            model.CreatorName = AuthenticationManager.LoggedUser.Username;
+            model.CreatorId = entity.CreatorId;
             model.ResponsibleUsers = entity.ResponsibleUsers;
-            model.ResponsibleUserName = entity.ResponsibleUserName;
             model.Title = entity.Title;
             model.Content = entity.Content;
-
             UsersRepository userRepo = new UsersRepository();
             model.Users = userRepo.GetAll().ToList();
         }
