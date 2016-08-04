@@ -6,7 +6,6 @@
     {
         public int CreatorId { get; set; }
         public int TaskId { get; set; }
-        public string CreatorName { get; set; }
         public string Comment { get; set; }
         public DateTime CreateDate { get; set; }
     }

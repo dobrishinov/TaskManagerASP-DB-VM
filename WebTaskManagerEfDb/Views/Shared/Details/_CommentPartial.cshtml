@@ -1,0 +1,36 @@
+﻿@model WebTaskManagerEfDb.ViewModels.Tasks.TaskDetailsVM
+
+@{
+    ViewBag.Title = "Comments";
+}
+
+<h2>Comments</h2>
+
+<p>
+    @Html.ActionLink("Create new Comment", "Edit", "CommentsManager", new { id = 0 }, new { @class = "btn btn-success" })
+</p>
+
+
+<table class="table table-hover">
+    <tr>
+        <th>Estimated Time</th>
+        <th>Create Time</th>
+        <th>Last Change</th>
+    </tr>
+
+    @foreach (var item in Model.CommentsList)
+    {
+        <tr>
+            <td>
+                @item.Comment
+            </td>
+            <td>
+                @item.CreateDate
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "CommentsManager", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", "CommentsManager", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>

@@ -6,39 +6,26 @@
     using System.Web.Mvc;
     using Models;
     using ViewModels;
-    using System;
 
     public abstract class BaseController<T, EVM, IVM> : Controller
-
         // T - Entity
         where T : BaseEntity, new()
         //Edit - one element
         where EVM : BaseEditVM, new()
         //Index - all elements
         where IVM : BaseListVM<T>, new()
-
     {
         public BaseController()
         {
             this.Repository = CreateRepository();
         }
-
-        protected virtual void PopulateIndex(IVM model)
-        {
-            TryUpdateModel(model);
-            BaseRepository<T> repo = CreateRepository();
-            model.Items = repo.GetAll().ToList();
-        }
-
+        
         private BaseRepository<T> Repository = null;
         public abstract BaseRepository<T> CreateRepository();
         public abstract void PopulateModel(EVM model, T entity);
         public abstract void PopulateEntity(T entity, EVM model);
-
-        protected abstract void BuildIndexModel(IVM model);
-
-
-        // GET: Base
+        
+         // GET: Base
         public ActionResult Index()
         {
             if (AuthenticationManager.LoggedUser == null)
@@ -48,10 +35,16 @@
             model.Pager = new Pager();
             TryUpdateModel(model);
 
-            BuildIndexModel(model);
+            string action = this.ControllerContext.RouteData.Values["action"].ToString();
+            string controller = this.ControllerContext.RouteData.Values["controller"].ToString();
+            //t => t.CreatorId == AuthenticationManager.LoggedUser.Id|| t.ResponsibleUsers == AuthenticationManager.LoggedUser.Id
+            
+            model.Items = Repository.GetAll(null, model.Pager.CurrentPage, model.Pager.PageSize).ToList();
+            model.Pager = new Pager(Repository.GetAll().Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
+            
             return View(model);
         }
-
+        
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -82,15 +75,6 @@
             Repository.Save(entity);
 
             return RedirectToAction("Index");
-        }
-
-        public virtual ActionResult Details(int id)
-        {
-            EVM model = new EVM();
-            T entity = new T();
-            entity = CreateRepository().GetById(id);
-            PopulateModel(model, entity);
-            return View(model);
         }
 
         public ActionResult Delete(int id)

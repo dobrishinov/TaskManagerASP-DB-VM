@@ -1,4 +1,4 @@
-﻿@model WebTaskManagerEfDb.ViewModels.Tasks.TasksEditVM
+﻿@model WebTaskManagerEfDb.ViewModels.Tasks.TaskDetailsVM
 
 @{
     ViewBag.Title = "Details";
@@ -44,6 +44,24 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index", "TaskManagerController", new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "Index", new { id = Model.Id }, new { @class = "btn btn-info" })
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success" })
 </p>
+
+<!--Comments-->
+<div>
+    @Html.Partial("~/Views/Shared/Details/_CommentPartial.cshtml", Model)
+</div>
+
+<div>
+    @Html.Partial("_PagingPartial", Model.PagerComments)
+</div>
+
+<!--Work Log-->
+<div>
+    @Html.Partial("~/Views/Shared/Details/_WorkLogPartial.cshtml", Model)
+</div>
+
+<div>
+    @Html.Partial("_PagingPartial", Model.PagerWorkLog)
+</div>

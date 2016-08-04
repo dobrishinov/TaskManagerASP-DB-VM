@@ -1,0 +1,39 @@
+﻿@model WebTaskManagerEfDb.ViewModels.Tasks.TaskDetailsVM
+
+@{
+    ViewBag.Title = "WorkLog";
+}
+
+<h2>WorkLog</h2>
+
+<p>
+    @Html.ActionLink("Create new Work Log", "Edit", "WorkLogManager", new { id = 0 } ,new { @class = "btn btn-success" })
+</p>
+
+
+<table class="table table-hover">
+    <tr>
+        <th>Estimated Time</th>
+        <th>Create Time</th>
+        <th>Last Change</th>
+    </tr>
+
+    @foreach (var item in Model.WorkLogList)
+    {
+        <tr>
+            <td>
+                @item.EstimatedTime
+            </td>
+            <td>
+                @item.CreateTime
+            </td>
+            <td>
+                @item.LastChange
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "WorkLogManager", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", "WorkLogManager", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>

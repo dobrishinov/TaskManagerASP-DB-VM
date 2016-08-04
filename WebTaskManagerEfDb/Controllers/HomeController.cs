@@ -48,14 +48,16 @@
 
         public ActionResult Fake()
         {
-            UsersRepository urepo = new UsersRepository();
-            UserEntity u = new UserEntity();
-            u.Username = "admin";
-            u.Password = "admin";
-            u.LastName = "admin";
-            u.FirstName = "admin";
-            u.AdminStatus = true;
-            urepo.Save(u);
+            
+            UsersRepository a = new UsersRepository();
+            CommentsRepository b = new CommentsRepository();
+            TimeRepository c = new TimeRepository();
+            TasksRepository d = new TasksRepository();
+            b.Count();
+            d.Count();
+            c.Count();
+            a.Count();
+
             return View();
         }
     }
