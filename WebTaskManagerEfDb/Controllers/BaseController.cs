@@ -24,8 +24,13 @@
         public abstract BaseRepository<T> CreateRepository();
         public abstract void PopulateModel(EVM model, T entity);
         public abstract void PopulateEntity(T entity, EVM model);
-        
-         // GET: Base
+
+        public virtual ActionResult Redirect(T entity)
+        {
+            return RedirectToAction("Index");
+        }
+
+        // GET: Base
         public ActionResult Index()
         {
             if (AuthenticationManager.LoggedUser == null)
@@ -58,6 +63,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(FormCollection collection)
         {
             if (AuthenticationManager.LoggedUser == null)
@@ -65,16 +71,14 @@
 
             EVM model = new EVM();
             TryUpdateModel(model);
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            T entity = new T();
+          
+           
+            T entity = (model.Id <= 0) ? new T() : Repository.GetById(model.Id);
             PopulateEntity(entity, model);
             Repository.Save(entity);
 
-            return RedirectToAction("Index");
+             return Redirect(entity);
+            
         }
 
         public ActionResult Delete(int id)
@@ -86,7 +90,7 @@
             T entity = Repository.GetById(id);
             Repository.Delete(entity);
 
-            return RedirectToAction("Index");
+            return Redirect(entity);
         }
     }
 }

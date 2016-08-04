@@ -7,7 +7,7 @@
 <h2>WorkLog</h2>
 
 <p>
-    @Html.ActionLink("Create new Work Log", "Edit", "WorkLogManager", new { id = 0 } ,new { @class = "btn btn-success" })
+    @Html.ActionLink("Create new Work Log", "Edit", "WorkLogManager", new { id = 0, TaskId = Model.Id } ,new { @class = "btn btn-success" })
 </p>
 
 
@@ -31,8 +31,8 @@
                 @item.LastChange
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", "WorkLogManager", new { id = item.Id }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Delete", "Delete", "WorkLogManager", new { id = item.Id }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Edit", "Edit", "WorkLogManager", new { id = item.Id, taskId = Model.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", "WorkLogManager", new { id = item.Id}, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

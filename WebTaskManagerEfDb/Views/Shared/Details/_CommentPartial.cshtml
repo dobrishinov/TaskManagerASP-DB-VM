@@ -6,9 +6,9 @@
 
 <h2>Comments</h2>
 
-<p>
-    @Html.ActionLink("Create new Comment", "Edit", "CommentsManager", new { id = 0 }, new { @class = "btn btn-success" })
-</p>
+@*<p>
+    @Html.ActionLink("Create new Comment", "Edit", "CommentsManager", new { id = 0, TaskId=Model.Id }, new { @class = "btn btn-success" })
+</p>*@
 
 
 <table class="table table-hover">
@@ -28,8 +28,8 @@
                 @item.CreateDate
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", "CommentsManager", new { id = item.Id }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Delete", "Delete", "CommentsManager", new { id = item.Id }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Edit", "Edit", "CommentsManager", new { Id = item.Id, TaskId = Model.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", "CommentsManager", new { id = item.Id}, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

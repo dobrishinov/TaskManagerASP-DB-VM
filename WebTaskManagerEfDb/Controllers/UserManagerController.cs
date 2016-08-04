@@ -13,7 +13,6 @@
 
         public override void PopulateEntity(UserEntity entity, UsersEditVM model)
         {
-            entity.Id = model.Id;
             entity.FirstName = model.FirstName;
             entity.LastName = model.LastName;
             entity.Username = model.Username;
