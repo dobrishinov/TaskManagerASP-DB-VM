@@ -4,6 +4,7 @@
     using DataAccess.Repository;
     using Models;
     using System;
+    using System.Linq;
     using System.Web.Mvc;
     using ViewModels.Comments;
 
@@ -21,6 +22,9 @@
 
         public override void PopulateEntity(CommentEntity entity, CommentsEditVM model)
         {
+            UsersRepository userRepo = new UsersRepository();
+            UserEntity User = userRepo.GetAll().FirstOrDefault(u => u.Id == entity.CreatorId);
+
             entity.TaskId = model.TaskId;
             entity.CreatorId = AuthenticationManager.LoggedUser.Id;
             entity.Comment = model.Comment;
@@ -29,7 +33,9 @@
 
         public override void PopulateModel(CommentsEditVM model, CommentEntity entity)
         {
-
+            UsersRepository userRepo = new UsersRepository();
+            UserEntity User = userRepo.GetAll().FirstOrDefault(u => u.Id == entity.CreatorId);
+                    
             int taskId = Convert.ToInt32(this.Request["taskID"]);
             model.Id = entity.Id;
             model.TaskId = taskId;

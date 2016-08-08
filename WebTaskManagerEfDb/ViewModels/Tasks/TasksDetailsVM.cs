@@ -24,6 +24,7 @@
 
         public List<CommentEntity> CommentsList { get; set; }
         public List<TimeEntity> WorkLogList { get; set; }
+        public UserEntity Users { get; set; }
 
         public string ResponsibleName { get; set; }
     }

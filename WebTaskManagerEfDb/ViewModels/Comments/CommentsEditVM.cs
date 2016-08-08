@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace WebTaskManagerEfDb.ViewModels.Comments
+﻿namespace WebTaskManagerEfDb.ViewModels.Comments
 {
+    using DataAccess.Entity;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Web;
+
     public class CommentsEditVM : BaseEditVM
     {
         [Required]
@@ -18,5 +19,6 @@ namespace WebTaskManagerEfDb.ViewModels.Comments
         public string Comment { get; set; }
         [Required]
         public DateTime CreateDate { get; set; }
+        public UserEntity User { get; set; }
     }
 }

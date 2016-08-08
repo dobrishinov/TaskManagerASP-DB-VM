@@ -8,6 +8,8 @@
     using System.Web.Mvc;
     using ViewModels;
     using System;
+    using System.Linq.Expressions;
+    using System.Collections.Generic;
     public class TasksManagerController : BaseController<TaskEntity, TasksEditVM, TasksListVM>
     {
         public override BaseRepository<TaskEntity> CreateRepository()
@@ -15,8 +17,14 @@
             return new TasksRepository();
         }
 
+        protected override Expression<Func<TaskEntity, bool>> CreateFilter()
+        {
+            return t=> t.CreatorId == AuthenticationManager.LoggedUser.Id || t.ResponsibleUsers == AuthenticationManager.LoggedUser.Id;
+        }
+
         public override void PopulateEntity(TaskEntity entity, TasksEditVM model)
         {
+            
             entity.CreatorId = AuthenticationManager.LoggedUser.Id;
             entity.ResponsibleUsers = model.ResponsibleUsers;
             entity.Title = model.Title;
@@ -94,6 +102,7 @@
             model.Content = task.Content;
             model.Title = task.Title;
             model.CreateTime = task.CreateTime;
+            UserEntity Users = userRepo.GetAll().FirstOrDefault(u => u.Id == task.CreatorId);
 
             //fill the model's list that give to the partialsViews
             model.CommentsList = commentRepo.GetAll(c => c.TaskId == model.Id, model.PagerComments.CurrentPage, model.PagerComments.PageSize).ToList();
