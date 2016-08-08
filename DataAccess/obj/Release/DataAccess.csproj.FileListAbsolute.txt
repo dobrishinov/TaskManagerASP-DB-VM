@@ -1,0 +1,9 @@
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Release\DataAccess.dll.config
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Release\DataAccess.dll
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Release\DataAccess.pdb
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Release\EntityFramework.dll
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Release\EntityFramework.xml
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\obj\Release\DataAccess.dll
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\obj\Release\DataAccess.pdb

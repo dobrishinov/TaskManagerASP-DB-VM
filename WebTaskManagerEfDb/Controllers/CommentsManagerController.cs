@@ -24,7 +24,7 @@
             entity.TaskId = model.TaskId;
             entity.CreatorId = AuthenticationManager.LoggedUser.Id;
             entity.Comment = model.Comment;
-            entity.CreateDate = model.CreateDate;
+            entity.CreateDate = DateTime.Now;
         }
 
         public override void PopulateModel(CommentsEditVM model, CommentEntity entity)

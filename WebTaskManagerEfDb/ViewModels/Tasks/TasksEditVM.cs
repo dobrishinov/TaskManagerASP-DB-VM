@@ -1,10 +1,12 @@
 ﻿namespace WebTaskManagerEfDb.ViewModels.Tasks
 {
     using DataAccess.Entity;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
+
     public class TasksEditVM : BaseEditVM
     {
         [Required]
@@ -18,6 +20,7 @@
         [Required(ErrorMessage = "Assigned is required!")]
         [Display(Name = "Assigned to:")]
         public int ResponsibleUsers { get; set; }
+        public DateTime CreateTime { get; set; }
 
         public List<UserEntity> Users;
         public IEnumerable<SelectListItem> UsersList

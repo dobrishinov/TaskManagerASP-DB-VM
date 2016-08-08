@@ -21,8 +21,8 @@
         {
             entity.Id = model.Id;
             entity.TaskId = model.TaskId;
-            entity.LastChange = model.LastChange;
-            entity.CreateTime = model.CreateTime;
+            entity.LastChange = DateTime.Now;
+            entity.CreateTime = DateTime.Now;
             entity.EstimatedTime = model.EstimatedTime;
         }
 

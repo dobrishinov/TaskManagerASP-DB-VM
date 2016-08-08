@@ -1,0 +1,78 @@
+﻿@model WebTaskManagerEfDb.ViewModels.Tasks.TaskDetailsVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tasks Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResponsibleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResponsibleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-info" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success" })
+</p>
+
+<!--Comments-->
+<p>
+    @Html.ActionLink("Create new Comment", "Edit", "CommentsManager", new { TaskId = Model.Id }, new { @class = "btn btn-success" })
+</p>
+<div>
+    @Html.Partial("~/Views/Shared/Details/_CommentPartial.cshtml", Model)
+</div>
+
+<div>
+    @Html.Partial("_PagingPartial", Model.PagerComments)
+</div>
+
+<!--Work Log-->
+<div>
+    @Html.Partial("~/Views/Shared/Details/_WorkLogPartial.cshtml", Model)
+</div>
+
+<div>
+    @Html.Partial("_PagingPartial", Model.PagerWorkLog)
+</div>

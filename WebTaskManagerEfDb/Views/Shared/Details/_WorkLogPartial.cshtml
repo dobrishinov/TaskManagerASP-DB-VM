@@ -15,7 +15,7 @@
     <tr>
         <th>Estimated Time</th>
         <th>Create Time</th>
-        <th>Last Change</th>
+        <th>Actions</th>
     </tr>
 
     @foreach (var item in Model.WorkLogList)
@@ -26,9 +26,6 @@
             </td>
             <td>
                 @item.CreateTime
-            </td>
-            <td>
-                @item.LastChange
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", "WorkLogManager", new { id = item.Id, taskId = Model.Id }, new { @class = "btn btn-info" }) |

@@ -1,0 +1,21 @@
+﻿
+<ul class="nav navbar-nav navbar-right">
+    @if (WebTaskManagerEfDb.Models.AuthenticationManager.LoggedUser == null)
+    {
+        <li style="float: left; width: 150px; text-decoration: none; color: black;"><a href="/Home/Login">Log in</a></li>
+    }
+    else
+    {
+        if (WebTaskManagerEfDb.Models.AuthenticationManager.LoggedUser.AdminStatus == true)
+        {
+            <li>@Html.ActionLink("Manage Tasks", "", "TasksManager")</li>
+            <li>@Html.ActionLink("Manage Users", "", "UsersManager")</li>
+            <li style="float: left; width: 150px; text-decoration: none; color: black;"><a href="/Home/Logout">Log out</a></li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Manage Tasks", "", "TasksManager")</li>
+            <li style="float: left; width: 150px; text-decoration: none; color: black;"><a href="/Home/Logout">Log out</a></li>
+        }
+    }
+</ul>

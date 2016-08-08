@@ -15,6 +15,7 @@
     <tr>
         <th>Title</th>
         <th>Content</th>
+        <th>Last Edit</th>
         <th>Actions</th>
     </tr>
 
@@ -26,6 +27,9 @@
             </td>
             <td>
                 @item.Content
+            </td>
+            <td>
+                @item.CreateTime
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info" }) |
