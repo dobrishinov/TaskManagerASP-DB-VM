@@ -15,6 +15,5 @@ C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\
 C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Debug\EntityFramework.xml
 C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\DataAccess\obj\Debug\DataAccess.pdb

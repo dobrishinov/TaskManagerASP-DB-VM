@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Entity\CommentEntity.cs" />
+    <Compile Include="Entity\ISelectedItem.cs" />
+    <Compile Include="Entity\SelectItem.cs" />
     <Compile Include="Entity\StatusEntity.cs" />
     <Compile Include="Entity\TaskEntity.cs" />
     <Compile Include="Entity\TimeEntity.cs" />

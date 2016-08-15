@@ -1,0 +1,182 @@
+﻿@model System.Object
+
+@{
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    string action = this.ViewContext.RouteData.Values["action"].ToString();
+    string namePrefix = Model.GetType().GetProperty("Prefix").GetValue(Model, null).ToString();
+    string idPrefix = namePrefix.Replace(".", "_");
+    var parentPager = (WebTaskManagerEfDb.ViewModels.Pager)Model.GetType().GetProperty("ParentPager").GetValue(Model, null);
+
+
+    string id = Model.GetType().GetProperty("ActionId").GetValue(Model, null) == null ? "" : Model.GetType().GetProperty("ActionId").GetValue(Model, null).ToString();
+
+
+    var editableProperties = new Dictionary<System.Reflection.PropertyInfo, string>();
+    foreach (System.Reflection.PropertyInfo pi in Model.GetType().GetProperties())
+    {
+        object obj = pi.GetCustomAttributes(false).FirstOrDefault(a => a is WebTaskManagerEfDb.Tools.FilterPropertyAttribute);
+        if (obj != null)
+        {
+            WebTaskManagerEfDb.Tools.FilterPropertyAttribute attr = (WebTaskManagerEfDb.Tools.FilterPropertyAttribute)obj;
+            editableProperties.Add(pi, attr.DisplayName);
+        }
+    }
+}
+<form action="/@controller/@action/@id" method="get">
+
+    @foreach (string key in this.Request.QueryString.Keys)
+    {
+        if (!key.StartsWith(namePrefix) && key != parentPager.Prefix + ".CurrentPage")
+        {
+            @Html.Hidden(key, this.Request.QueryString[key]);
+        }
+    }
+
+    @foreach (var kvp in this.ViewContext.RouteData.Values)
+    {
+        if (kvp.Key != "controller" && kvp.Key != "id" && kvp.Key != "action" && kvp.Key != parentPager.Prefix + ".CurrentPage" && !kvp.Key.StartsWith(namePrefix))
+        {
+            @Html.Hidden(kvp.Key, kvp.Value);
+        }
+    }
+
+    <p class="row">
+        @foreach (var kvp in editableProperties)
+        {
+            <div class="col-xs-1 text-right">
+                @Html.Label(idPrefix + kvp.Key.Name, kvp.Value, new { @class = "control-label text-center" })
+            </div>
+            <div class="col-xs-2">
+                @Html.TextBox(namePrefix + kvp.Key.Name, kvp.Key.GetValue(Model, null), new { @class = "form-control text-center" })
+            </div>
+        }
+        <div class="col-xs-1 text-left">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </p>
+    <br />
+    <br />
+</form>
+
+
+@*@model System.Object
+@using WebTaskManagerEfDb.Tools*@
+
+@*@{
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    string action = this.ViewContext.RouteData.Values["action"].ToString();
+    string namePrefix = Model.GetType().GetProperty("Prefix").GetValue(Model, null).ToString();
+    string idPrefix = namePrefix.Replace(".", "_");
+    var parentPager = (WebTaskManagerEfDb.ViewModels.Pager)Model.GetType().GetProperty("ParentPager").GetValue(Model, null);
+    var editableProperties = new Dictionary<System.Reflection.PropertyInfo, FilterPropertyAttribute>();
+
+    foreach (System.Reflection.PropertyInfo pi in Model.GetType().GetProperties())
+    {
+        object obj = pi.GetCustomAttributes(false).FirstOrDefault(a => a is FilterPropertyAttribute);
+        if (obj != null)
+        {
+            {
+                FilterPropertyAttribute attrib = (FilterPropertyAttribute)obj;
+                editableProperties.Add(pi, attrib);
+            }
+        }
+    }
+    var props = Model.GetType().GetProperties();
+    string id = "";
+    foreach (var prop in props)
+    {
+        if (prop.Name == "TaskId")
+        {
+            id = prop.GetValue(Model).ToString();
+        }
+    }
+}
+
+<form action="/@controller/@action/@id" method="get">
+    @foreach (string key in this.Request.QueryString.Keys)
+    {
+        if (!key.StartsWith(namePrefix) && key != parentPager.Prefix + "CurrentPage")
+        {
+            @Html.Hidden(key, this.Request.QueryString[key]);
+        }
+    }
+
+    @foreach (var kvp in this.ViewContext.RouteData.Values)
+    {
+        if (kvp.Key != "controller" && kvp.Key != "action" && kvp.Key != parentPager.Prefix + "CurrentPage" && !kvp.Key.StartsWith(namePrefix))
+        {
+            @Html.Hidden(kvp.Key, kvp.Value);
+        }
+    }
+
+    <p>
+        @foreach (var kvp in editableProperties)
+        {
+            if (!string.IsNullOrEmpty(kvp.Value.DropDownTargetProperty))
+            {
+                @Html.Label(idPrefix + kvp.Key.Name, kvp.Value.DisplayName)
+                <select name="@namePrefix@kvp.Value.DropDownTargetProperty">
+                    <option value="null">Please Select Item</option>
+                    @foreach (var item in (List<DataAccess.Entity.ISelectItem>)kvp.Key.GetValue(Model, null))
+                    {
+                        string selected = "";
+                        if (item.Value != null && Model.GetType().GetProperty(kvp.Value.DropDownTargetProperty).GetValue(Model, null) != null)
+                        {
+                            selected = item.Value == Model.GetType().GetProperty(kvp.Value.DropDownTargetProperty).GetValue(Model).ToString().ToLower() ? "selected" : "";
+                        }
+                        <option value="@item.Value" @selected>@item.Text</option>
+                    }
+                </select>
+            }
+            else
+            {
+                if (@kvp.ToString().Contains("String"))
+                {
+                    @Html.Label(idPrefix + kvp.Key.Name, kvp.Value.DisplayName)
+                    @Html.TextBox(namePrefix + kvp.Key.Name, kvp.Key.GetValue(Model, null))
+                }
+                else if (@kvp.ToString().Contains("Int"))
+                {
+                    @Html.Label(idPrefix + kvp.Key.Name, kvp.Value.DisplayName)
+                    @Html.TextBox(namePrefix + kvp.Key.Name, kvp.Key.GetValue(Model, null))
+                }
+                else if (@kvp.ToString().Contains("Bool"))
+                {
+                    @Html.Label(idPrefix + kvp.Key.Name, kvp.Value.DisplayName)
+                    @Html.TextBox(namePrefix + kvp.Key.Name, kvp.Key.GetValue(Model, null))
+                }
+                @*else if (@kvp.ToString().Contains("DateTime"))
+                    {
+                        @Html.Label(idPrefix + kvp.Key.Name, kvp.Value.DisplayName)
+                        @Html.TextBox(namePrefix + kvp.Key.Name, kvp.Key.GetValue(Model, null))
+                    }*@
+            @*}
+        }
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+</form>*@
+
+@*@model System.Object
+
+    @{
+        string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+        string action = this.ViewContext.RouteData.Values["action"].ToString();
+        string namePrefix = Model.GetType().GetProperty("Prefix").GetValue(Model, null).ToString();
+        string idPrefix = namePrefix.Replace(".", "_");
+        //var editableProperties = new Dictionary<System.Reflection.PropertyInfo, TaskManagerYankaMVC.Tools.FilterPropertyAttribute>
+        System.Reflection.PropertyInfo[] properties = Model.GetType().GetProperties();
+
+        using (Html.BeginForm(action, controller, FormMethod.Get))
+        {
+            foreach (System.Reflection.PropertyInfo prop in properties)
+            {
+                if (prop.Name != "Prefix")
+                {
+                    @Html.Label(prop.Name);
+                    @Html.TextBox(namePrefix + prop.Name, prop.GetValue(Model));
+
+                }
+            }
+            <input type="submit" value="Search" />
+        }
+    }*@

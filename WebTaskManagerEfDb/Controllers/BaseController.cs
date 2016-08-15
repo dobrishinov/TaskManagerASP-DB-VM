@@ -8,13 +8,15 @@
     using ViewModels;
     using System.Linq.Expressions;
     using System;
-    public abstract class BaseController<T, EVM, IVM> : Controller
+    public abstract class BaseController<T, EVM, IVM, F> : Controller
         // T - Entity
         where T : BaseEntity, new()
         //Edit - one element
         where EVM : BaseEditVM, new()
         //Index - all elements
-        where IVM : BaseListVM<T>, new()
+        where IVM : BaseListVM<T, F>, new()
+        // Filter
+        where F : BaseFilterVM<T>, new()
     {
         public BaseController()
         {
@@ -45,14 +47,17 @@
 
             IVM model = new IVM();
             model.Pager = new Pager();
+            model.Filter = new F();
             TryUpdateModel(model);
 
             string action = this.ControllerContext.RouteData.Values["action"].ToString();
             string controller = this.ControllerContext.RouteData.Values["controller"].ToString();
             //t => t.CreatorId == AuthenticationManager.LoggedUser.Id|| t.ResponsibleUsers == AuthenticationManager.LoggedUser.Id
-            
-            model.Items = Repository.GetAll(CreateFilter(), model.Pager.CurrentPage, model.Pager.PageSize).ToList();
-            model.Pager = new Pager(Repository.GetAll(CreateFilter()).Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
+
+            model.Filter.ParentPager = model.Pager;
+
+            model.Items = Repository.GetAll(model.Filter.BuildFilter(), model.Pager.CurrentPage, model.Pager.PageSize).ToList();
+            model.Pager = new Pager(Repository.GetAll(model.Filter.BuildFilter()).Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
             
             return View(model);
         }

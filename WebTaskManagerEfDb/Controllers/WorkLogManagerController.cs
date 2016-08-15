@@ -5,7 +5,7 @@
     using DataAccess.Repository;
     using System.Web.Mvc;
     using System;
-    public class WorkLogManagerController : BaseController<TimeEntity, WorkLogEditVM, WorkLogListVM>
+    public class WorkLogManagerController : BaseController<TimeEntity, WorkLogEditVM, WorkLogListVM, WorkLogFilterVM>
     {
         public override BaseRepository<TimeEntity> CreateRepository()
         {

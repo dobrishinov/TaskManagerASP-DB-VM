@@ -7,8 +7,8 @@
     using System.Linq;
     using System.Web.Mvc;
     using ViewModels.Comments;
-
-    public class CommentsManagerController : BaseController<CommentEntity, CommentsEditVM , CommentsListVM>
+    using ViewModels.CommentsFilterVМ;
+    public class CommentsManagerController : BaseController<CommentEntity, CommentsEditVM , CommentsListVM, CommentsFilterVM>
     {
         public override BaseRepository<CommentEntity> CreateRepository()
         {

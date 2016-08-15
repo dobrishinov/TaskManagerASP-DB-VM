@@ -2,7 +2,7 @@
 {
     using DataAccess.Entity;
 
-    public class UsersListVM : BaseListVM<UserEntity>
+    public class UsersListVM : BaseListVM<UserEntity, UsersFilterVM>
     {
     }
 }

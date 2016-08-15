@@ -10,7 +10,7 @@
     using System;
     using System.Linq.Expressions;
     using System.Collections.Generic;
-    public class TasksManagerController : BaseController<TaskEntity, TasksEditVM, TasksListVM>
+    public class TasksManagerController : BaseController<TaskEntity, TasksEditVM, TasksListVM, TasksFilterVM>
     {
         public override BaseRepository<TaskEntity> CreateRepository()
         {

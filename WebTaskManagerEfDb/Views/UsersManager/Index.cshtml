@@ -9,7 +9,9 @@
 <p>
     @Html.ActionLink("Create new user", "Edit", "UserManagerController", new { @class = "btn btn-success" })
 </p>
-
+<hr/>
+@Html.Partial("_PartialFilter", Model.Filter)
+<br />
 
 <table class="table table-hover sortable">
     <tr>

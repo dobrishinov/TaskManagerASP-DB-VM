@@ -9,6 +9,9 @@
 <p>
     @Html.ActionLink("Create new tasks", "Edit", "TaskManagerController", new { @class = "btn btn-success" })
 </p>
+<hr />
+@Html.Partial("_PartialFilter", Model.Filter)
+<br />
 
 
 <table class="table table-hover sortable">

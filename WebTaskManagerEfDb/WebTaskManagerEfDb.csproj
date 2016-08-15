@@ -133,25 +133,32 @@
     <Compile Include="Controllers\CommentsManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TasksManagerController.cs" />
-    <Compile Include="Controllers\UserManagerController.cs" />
+    <Compile Include="Controllers\UsersManagerController.cs" />
     <Compile Include="Controllers\WorkLogManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AuthenticationManager.cs" />
+    <Compile Include="Models\SelectListHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\FilterPropertyAttribute.cs" />
     <Compile Include="ViewModels\BaseEditVM.cs" />
+    <Compile Include="ViewModels\BaseFilterVM.cs" />
     <Compile Include="ViewModels\BaseListVM.cs" />
     <Compile Include="ViewModels\Comments\CommentsEditVM.cs" />
+    <Compile Include="ViewModels\Comments\CommentsFilterVM.cs" />
     <Compile Include="ViewModels\Comments\CommentsListVM.cs" />
     <Compile Include="ViewModels\Pager.cs" />
+    <Compile Include="ViewModels\Tasks\TaskFilterVM.cs" />
     <Compile Include="ViewModels\Tasks\TasksDetailsVM.cs" />
     <Compile Include="ViewModels\Tasks\TasksEditVM.cs" />
     <Compile Include="ViewModels\Tasks\TasksListVM.cs" />
     <Compile Include="ViewModels\Users\UsersEditVM.cs" />
+    <Compile Include="ViewModels\Users\UsersFilterVM.cs" />
     <Compile Include="ViewModels\Users\UsersListVM.cs" />
     <Compile Include="ViewModels\WorkLog\WorkLogEditVM.cs" />
+    <Compile Include="ViewModels\WorkLog\WorkLogFilterVM.cs" />
     <Compile Include="ViewModels\WorkLog\WorkLogListVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +207,7 @@
     <Content Include="Views\Shared\Details\_WorkLogPartial.cshtml" />
     <Content Include="Views\CommentsManager\Edit.cshtml" />
     <Content Include="Views\WorkLogManager\Edit.cshtml" />
+    <Content Include="Views\Shared\_PartialFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

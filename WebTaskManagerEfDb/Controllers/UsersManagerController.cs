@@ -4,7 +4,7 @@
     using DataAccess.Repository;
     using ViewModels.Users;
     
-    public class UsersManagerController : BaseController<UserEntity, UsersEditVM, UsersListVM>
+    public class UsersManagerController : BaseController<UserEntity, UsersEditVM, UsersListVM, UsersFilterVM>
     {
         public override BaseRepository<UserEntity> CreateRepository()
         {

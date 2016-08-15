@@ -2,7 +2,8 @@
 {
     using DataAccess.Entity;
 
-    public class TasksListVM : BaseListVM<TaskEntity>
+    public class TasksListVM : BaseListVM<TaskEntity, TasksFilterVM>
     {
+
     }
 }

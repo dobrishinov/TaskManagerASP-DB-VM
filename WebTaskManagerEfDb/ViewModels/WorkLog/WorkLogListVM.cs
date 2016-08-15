@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WebTaskManagerEfDb.ViewModels.WorkLog
 {
-    public class WorkLogListVM : BaseListVM<TimeEntity>
+    public class WorkLogListVM : BaseListVM<TimeEntity, WorkLogFilterVM>
     {
     }
 }
