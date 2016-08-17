@@ -10,11 +10,12 @@
     using System;
     using System.Linq.Expressions;
     using System.Collections.Generic;
+    using ServiceLayer.Services;
     public class TasksManagerController : BaseController<TaskEntity, TasksEditVM, TasksListVM, TasksFilterVM>
     {
-        public override BaseRepository<TaskEntity> CreateRepository()
+        public override BaseService<TaskEntity> CreateService()
         {
-            return new TasksRepository();
+            return new TasksService();
         }
 
         protected override Expression<Func<TaskEntity, bool>> CreateFilter()

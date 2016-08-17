@@ -90,3 +90,5 @@ C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\
 C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\WebTaskManagerEfDb\obj\Debug\WebTaskManagerEfDb.csprojResolveAssemblyReference.cache
 C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\WebTaskManagerEfDb\obj\Debug\WebTaskManagerEfDb.dll
 C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\WebTaskManagerEfDb\obj\Debug\WebTaskManagerEfDb.pdb
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\WebTaskManagerEfDb\bin\ServiceLayer.dll
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\WebTaskManagerEfDb\bin\ServiceLayer.pdb

@@ -226,6 +226,10 @@
       <Project>{21971dc1-87f8-4bb0-95b3-8fc398faac79}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
+      <Project>{2c42af4d-a2f0-4a9d-a670-8b9cc688fc75}</Project>
+      <Name>ServiceLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

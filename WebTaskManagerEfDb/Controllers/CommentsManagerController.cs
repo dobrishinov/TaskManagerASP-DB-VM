@@ -3,6 +3,7 @@
     using DataAccess.Entity;
     using DataAccess.Repository;
     using Models;
+    using ServiceLayer.Services;
     using System;
     using System.Linq;
     using System.Web.Mvc;
@@ -10,9 +11,9 @@
     using ViewModels.CommentsFilterVМ;
     public class CommentsManagerController : BaseController<CommentEntity, CommentsEditVM , CommentsListVM, CommentsFilterVM>
     {
-        public override BaseRepository<CommentEntity> CreateRepository()
+        public override BaseService<CommentEntity> CreateService()
         {
-            return new CommentsRepository();
+            return new CommentsService();
         }
 
         public override ActionResult Redirect(CommentEntity entity)

@@ -5,11 +5,12 @@
     using DataAccess.Repository;
     using System.Web.Mvc;
     using System;
+    using ServiceLayer.Services;
     public class WorkLogManagerController : BaseController<TimeEntity, WorkLogEditVM, WorkLogListVM, WorkLogFilterVM>
     {
-        public override BaseRepository<TimeEntity> CreateRepository()
+        public override BaseService<TimeEntity> CreateService()
         {
-            return new TimeRepository();
+            return new TimeService();
         }
 
         public override ActionResult Redirect(TimeEntity entity)

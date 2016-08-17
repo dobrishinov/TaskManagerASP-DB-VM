@@ -1,0 +1,9 @@
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\ServiceLayer\obj\Debug\ServiceLayer.csprojResolveAssemblyReference.cache
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\ServiceLayer\bin\Debug\ServiceLayer.dll
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\ServiceLayer\bin\Debug\ServiceLayer.pdb
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\ServiceLayer\bin\Debug\DataAccess.dll
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\ServiceLayer\bin\Debug\EntityFramework.dll
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\ServiceLayer\bin\Debug\DataAccess.pdb
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\ServiceLayer\bin\Debug\EntityFramework.xml
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\ServiceLayer\obj\Debug\ServiceLayer.dll
+C:\Users\Dobrishinov\Documents\Visual Studio 2015\Projects\WebTaskManagerEfDbVM\ServiceLayer\obj\Debug\ServiceLayer.pdb

@@ -2,13 +2,14 @@
 {
     using DataAccess.Entity;
     using DataAccess.Repository;
+    using ServiceLayer.Services;
     using ViewModels.Users;
-    
+
     public class UsersManagerController : BaseController<UserEntity, UsersEditVM, UsersListVM, UsersFilterVM>
     {
-        public override BaseRepository<UserEntity> CreateRepository()
+        public override BaseService<UserEntity> CreateService()
         {
-            return new UsersRepository();
+            return new UsersService();
         }
 
         public override void PopulateEntity(UserEntity entity, UsersEditVM model)

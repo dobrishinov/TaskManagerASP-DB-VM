@@ -8,6 +8,7 @@
     using ViewModels;
     using System.Linq.Expressions;
     using System;
+    using ServiceLayer.Services;
     public abstract class BaseController<T, EVM, IVM, F> : Controller
         // T - Entity
         where T : BaseEntity, new()
@@ -20,11 +21,11 @@
     {
         public BaseController()
         {
-            this.Repository = CreateRepository();
+            this.Service = CreateService();
         }
         
-        private BaseRepository<T> Repository = null;
-        public abstract BaseRepository<T> CreateRepository();
+        private BaseService<T> Service = null;
+        public abstract BaseService<T> CreateService();
         public abstract void PopulateModel(EVM model, T entity);
         public abstract void PopulateEntity(T entity, EVM model);
         protected Expression<Func<T, bool>> Filter { get; set; }
@@ -56,8 +57,8 @@
 
             model.Filter.ParentPager = model.Pager;
 
-            model.Items = Repository.GetAll(model.Filter.BuildFilter(), model.Pager.CurrentPage, model.Pager.PageSize).ToList();
-            model.Pager = new Pager(Repository.GetAll(model.Filter.BuildFilter()).Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
+            model.Items = Service.GetAll(model.Filter.BuildFilter(), model.Pager.CurrentPage, model.Pager.PageSize).ToList();
+            model.Pager = new Pager(Service.GetAll(model.Filter.BuildFilter()).Count(), model.Pager.CurrentPage, "Pager.", action, controller, model.Pager.PageSize);
             
             return View(model);
         }
@@ -68,7 +69,7 @@
             if (AuthenticationManager.LoggedUser == null)
                 return RedirectToAction("Login", "Home");
 
-            T entity = (id == null || id <= 0) ? new T() : Repository.GetById(id);
+            T entity = (id == null || id <= 0) ? new T() : Service.GetById(id);
             EVM model = new EVM();
             PopulateModel(model, entity);
             return View(model);
@@ -85,9 +86,9 @@
             TryUpdateModel(model);
           
            
-            T entity = (model.Id <= 0) ? new T() : Repository.GetById(model.Id);
+            T entity = (model.Id <= 0) ? new T() : Service.GetById(model.Id);
             PopulateEntity(entity, model);
-            Repository.Save(entity);
+            Service.Save(entity);
 
              return Redirect(entity);
             
@@ -99,8 +100,8 @@
                 return RedirectToAction("Login", "Home");
 
 
-            T entity = Repository.GetById(id);
-            Repository.Delete(entity);
+            T entity = Service.GetById(id);
+            Service.Delete(entity);
 
             return Redirect(entity);
         }
